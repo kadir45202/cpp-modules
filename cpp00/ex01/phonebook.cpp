@@ -1,4 +1,14 @@
-#include <iostream>
+#include "phonebook.hpp"
+
+void search()
+{
+	std::cout << "┌──────────┬──────────┬──────────┬──────────┐" << std::endl;
+    std::cout << "│" << std::setw(10) << std::right << "index";
+    std::cout << "│" << std::setw(10) << std::right << "first name";
+    std::cout << "│" << std::setw(10) << std::right << "last name";
+    std::cout << "│" << std::setw(10) << std::right << "nickname" << "│" << std::endl;
+    std::cout << "├──────────┼──────────┼──────────┼──────────┤" << std::endl;
+}
 
 void prompt(void)
 {
@@ -8,7 +18,7 @@ void prompt(void)
     std::cout << "EXIT   : Goodbye" << std::endl;
 }
 
-int main(int argc, char **argv)
+int main()
 {
     std::string	str;
 
@@ -21,7 +31,7 @@ int main(int argc, char **argv)
         if(str == "ADD")
             std::cout << "ADD" << std::endl;
         else if(str == "SEARCH")
-            std::cout << "SEARCH" << std::endl;
+            search();
         else if(str == "EXIT")
             return 0;
         else
