@@ -10,19 +10,14 @@ void search()
     std::cout << "├──────────┼──────────┼──────────┼──────────┤" << std::endl;
 }
 
-void prompt(void)
-{
-    std::cout << "Welcome to PhoneBook" << std::endl;
-    std::cout << "ADD    : Add user to the book" << std::endl;
-    std::cout << "SEARCH : Looking for somebody" << std::endl;
-    std::cout << "EXIT   : Goodbye" << std::endl;
-}
+
 
 int main()
 {
+    PhoneBook phonebook;
     std::string	str;
-
-    prompt();
+    int id = -1;
+    phonebook.prompt();
     
     while(42)
     {
@@ -31,13 +26,20 @@ int main()
         if(str == "ADD")
             std::cout << "ADD" << std::endl;
         else if(str == "SEARCH")
-            search();
+        {
+            if (!(std::cin >> id) || id < 0 || id > 7)
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout << "Error: Invalid ID" << std::endl;
+			}
+        }
         else if(str == "EXIT")
             return 0;
         else
         {
             std::cout << "Wrong word try again" << std::endl;
-            prompt();
+            phonebook.prompt();
         }
     }
 }
