@@ -1,47 +1,35 @@
-#include <fstream>
 #include <iostream>
-
-void	erase_and_insert(int *i, std::string *string1, std::string *string2, std::string *file_content)
-{
-	(*i) = (*file_content).find((*string1));
-	while((*i) != -1)
-	{
-		(*file_content).erase((*i), (*string1).length());
-		(*file_content).insert((*i), (*string2));
-		(*i) = (*file_content).find((*string1));
-	}
-}
+#include <fstream>
+#include <string>
 
 int main(int argc, char **argv)
 {
-	if (argc != 4)
+    if(argc != 4)
+    {
+        std::cout << "./name filename string1 string2" << std::endl;
+        return 0;
+    }
+
+	std::string str1, str2;
+	std::fstream filein;
+	//newfile.append(".replace");
+	std::fstream	fileout(std::string(argv[1]) + ".replace");
+	str1 = argv[2];
+	str2 = argv[3];
+	
+	filein.open(argv[1]);
+	if (filein.is_open()) {
+    std::string line;
+    while (std::getline(filein, line))
 	{
-		std::cout << "usage: ./replace <filename> <oldstring> <newstring>" << std::endl;
-		return (1);
+        std::cout << line << std::endl;
+		fileout << line;
+		fileout << '\n';
 	}
-	
-	std::ifstream		infile(argv[1]);
-	std::string	string1(argv[2]);
-	std::string	string2(argv[3]);
-	char				c;
-	int					i = 0;
-	
-	if (!std::string(argv[1]).length() || !string1.length() || !string2.length() || !infile.good())
+    }
+	else
 	{
-		std::cout << "usage: ./replace <filename> <oldstring> <newstring>" << std::endl;
-		return (1);
+		std::cout << "file is invalid" << std::endl;
+		return 0;
 	}
-	
-	std::string		file_content;
-	std::ofstream	outfile(std::string(argv[1]) + ".replace");
-	
-	while (infile.get(c))
-	{
-		file_content.push_back(c);
-	}
-	erase_and_insert(&i, &string1, &string2, &file_content);
-	outfile << file_content;
-	infile.close();
-	outfile.close();
-	return (0);
 }
