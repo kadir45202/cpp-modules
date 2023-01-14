@@ -1,25 +1,25 @@
-NAME = replace
+SRCS	=	main.cpp \
+			FileManager.cpp
+OBJS	= $(SRCS:%.cpp=%.o)
 
-SRCS =	main.cpp
-
-OBJS = ${SRCS:.cpp=.o}
-
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME	= FileManager
+CC		= c++
+RM		= rm -rf
+CFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
 .cpp.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.cpp=.o)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
+	$(CC) $(OBJS) -o $(NAME)
 
 clean:
-	@$(RM)  $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
