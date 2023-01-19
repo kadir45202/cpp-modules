@@ -13,11 +13,8 @@ public:
 	Fixed(const Fixed& var);
 	int getRawBits(void)const;
 	void setRawBits(int const raw);
-	Fixed &operator = (const Fixed &other); // overload
+	Fixed &operator = (const Fixed &other);
 	~Fixed();
 };
-
-
-
 
 #endif

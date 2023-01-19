@@ -1,24 +1,29 @@
 #ifndef FIXED_HPP
-# define FIXED_HPP
+#define FIXED_HPP
 
-#include <iostream>
+# include <iostream>
+# include <cmath>
 
-class Fixed
-{
+# define floatToFixed(x) (x * (float)(1 << nbrBits))
+# define fixedToFloat(x) ((float)x / (float)(1 << nbrBits))
+
+class Fixed {
 private:
-    int nbr;
+	int nbr;
 	static const int nbrBits = 8;
 public:
 	Fixed();
 	Fixed(const Fixed& var);
+	Fixed(int getNum);
+	Fixed(float getFloat);
 	int getRawBits(void)const;
 	void setRawBits(int const raw);
+	int	toInt() const;
+	float toFloat() const;
 	Fixed &operator = (const Fixed &other);
-	int toInt();
 	~Fixed();
 };
 
-
-
+std::ostream &operator << (std::ostream &os, const Fixed &a);
 
 #endif
